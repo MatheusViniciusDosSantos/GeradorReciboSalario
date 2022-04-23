@@ -13,6 +13,14 @@
             .column {
                 flex: 50%;
             }
+            /* .right {
+                float: right;
+                right: 0px;
+                width: auto;
+                padding: 10px;
+                margin: 10px;
+                border: solid 1px #000000;
+            } */
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,7 +79,7 @@
                     </div>
                     <div style="flex: 20%;">
                         <h5>Pix </h5>
-                        <input id="pix" type="radio" name="pagamento"/>
+                        <input id="pix" type="radio" name="pagamento" onclick=""/>
                         <br/>
                     </div>
                     <div style="flex: 20%;">
@@ -84,6 +92,16 @@
                         <input id="transferenciaDeposito" type="radio" name="pagamento"/>
                         <br/>
                     </div>
+                </div>
+                <br/>
+                <div id="pixDiv" style="display: none;">
+                    pix
+                </div>
+                <div id="transferenciaDepositoDiv" style="display: none;">
+                    transferencia
+                </div>
+                <div id="chequeDiv" style="display: none;">
+                    cheque
                 </div>
                 <br/><br/>
 
@@ -105,27 +123,34 @@
             </div>
             </br></br>
             <div id="reciboPronto" style="display: none;">
-                <button>
-
+                <button id="impressao" onclick="abrirImpressao()">
+                    Imprimir
                 </button>
 
-                <div style="border: 2px solid #000000; padding: 20px;
-                border-radius: 8px;">
-                <h3 style="text-align: center;">
-                    Recibo de Salário
-                </h3>
-                <div style="text-align: right;">
-                    <!-- Tirar h4 e colocar tudo na div delimitada -->
-                    <h4 style="border: solid 1px #000000;" id="valorSalario">
+                <div id="reciboSalario" style="border: 2px solid #000000; padding: 20px;
+                    border-radius: 8px;">
+                    <h3 style="text-align: center;">
+                        Recibo de Salário
+                    </h3>
+                    <div class="row">
+                        <div style="flex: 80%;"></div>
+                        <div id="valorSalario" style="border: solid 1px #000000; margin: 10px; justify-content: flex-end;"></div>
+                    </div>
                     
-                    </h4>
-                </div>
+                    <p id="paragrafoNome">
+                        teste de paragrafo dentro da
+                    </p>
+                    <p id="paragrafoTitulo"></p>
+                    <p id="paragrafoValor" style="border: #000000 solid 1px;"></p>
+                    <p id="paragrafoTexto"></p>
+                    <p id="" data-ng-if=""></p>
+                    <p id="paragrafoCidadeData" style="text-align: right;"></p>
                 
 
                 </div>
 
-                <button>
-                
+                <button id="impressao" onclick="abrirImpressao()">
+                    Imprimir
                 </button>
                 
             </div>
