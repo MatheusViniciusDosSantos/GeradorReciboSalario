@@ -53,7 +53,7 @@
                 <br/>
     
                 <h5>CPF ou CNPJ: </h5>
-                <input id="cpf" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                <input id="cpf" type="text" class="estiloBordaBotoes" style="width: 10%;" maxlength="18"/>
                 <br/><br/>
     
                 <div class="row">
@@ -74,34 +74,47 @@
                 <div class="row">
                     <div style="flex: 20%;">
                         <h5>Dinheiro </h5>
-                        <input id="dinheiro" type="radio" name="pagamento"/>
+                        <input id="dinheiro" type="radio" name="pagamento" onclick="clickFormaPagamento()" checked="checked"/>
                         <br/>
                     </div>
                     <div style="flex: 20%;">
                         <h5>Pix </h5>
-                        <input id="pix" type="radio" name="pagamento" onclick=""/>
+                        <input id="pix" type="radio" name="pagamento" onclick="clickFormaPagamento()"/>
                         <br/>
                     </div>
                     <div style="flex: 20%;">
                         <h5>Cheque  </h5>
-                        <input id="cheque" type="radio" name="pagamento"/>
+                        <input id="cheque" type="radio" name="pagamento" onclick="clickFormaPagamento()"/>
                         <br/>
                     </div>
                     <div style="flex: 20%;">
                         <h5>Transferência/Depósito</h5>
-                        <input id="transferenciaDeposito" type="radio" name="pagamento"/>
+                        <input id="transferenciaDeposito" type="radio" name="pagamento" onclick="clickFormaPagamento()"/>
                         <br/>
                     </div>
                 </div>
                 <br/>
+                <div id="dinheiroDiv" style="display: none;"></div>
                 <div id="pixDiv" style="display: none;">
-                    pix
+                    <h5>Chave: </h5>
+                    <input id="chavePix" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                    <br/>
                 </div>
                 <div id="transferenciaDepositoDiv" style="display: none;">
-                    transferencia
+                    <h5>Conta: </h5>
+                    <input id="conta" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                    <br/>
+                    <h5>Agência: </h5>
+                    <input id="agencia" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                    <br/>
                 </div>
                 <div id="chequeDiv" style="display: none;">
-                    cheque
+                    <h5>Conta: </h5>
+                    <input id="conta" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                    <br/>
+                    <h5>Agência: </h5>
+                    <input id="agencia" type="text" class="estiloBordaBotoes" style="width: 10%;"/>
+                    <br/>
                 </div>
                 <br/><br/>
 
@@ -109,7 +122,7 @@
                 <input id="vias" type="checkbox"/>
                 <br/><br/>
 
-                <button type="submit" style="background-color: #3273dc; border: 1px solid transparent; border-radius: 8px; width: 15%;"
+                <button type="submit" style="background-color: #3273dc; border: 1px solid transparent; border-radius: 8px;"
                 onclick="gerarRecibo()">
                     <div class="row" style="margin: 2px;">
                         <div style="background-color: #ffffff; padding: 1px;">
@@ -122,12 +135,21 @@
                 </button>
             </div>
             </br></br>
-            <div id="reciboPronto" style="display: none;">
-                <button id="impressao" onclick="abrirImpressao()">
-                    Imprimir
+            <div id="reciboPronto" style="display: none; background-color: #ffffff;">
+                <button id="impressao" onclick="abrirImpressao()" style="background-color: #ffffff;">
+                    <div class="row" style="margin: 2px;">
+                        <div style="background-color: #ffffff; padding: 1px;">
+                            <i class="fa fa-print" style="font-size:36px; color: #3273dc;"></i>
+                        </div>
+                        <div style="flex: 60%;">
+                            <span style="font-size: xx-large; color: #3273dc;">Imprimir</span>
+                        </div>
+                    </div>
                 </button>
+                <br/> <br/>
 
-                <div id="reciboSalario" style="border: 2px solid #000000; padding: 20px;
+                <div id="reciboImprimir">
+                    <div id="reciboSalario" style="border: 2px solid #000000; padding: 20px;
                     border-radius: 8px;">
                     <h3 style="text-align: center;">
                         Recibo de Salário
@@ -143,14 +165,45 @@
                     <p id="paragrafoTitulo"></p>
                     <p id="paragrafoValor" style="border: #000000 solid 1px;"></p>
                     <p id="paragrafoTexto"></p>
-                    <p id="" data-ng-if=""></p>
+                    <p id="paragrafoChavePix"></p>
                     <p id="paragrafoCidadeData" style="text-align: right;"></p>
+                    <br/><br/>
+                    <span id="assinatura" style="border-top: 1px solid #999; margin: auto; display: block; width: 30%; text-align: center;"></span>
+                    </div>
+                    <br/>
+
+                    <div id="reciboSalario2" style="border: 2px solid #000000; padding: 20px;
+                        border-radius: 8px; display: none;">
+                        <h3 style="text-align: center;">
+                            Recibo de Salário
+                        </h3>
+                        <div class="row">
+                            <div style="flex: 80%;"></div>
+                            <div id="valorSalario2" style="border: solid 1px #000000; margin: 10px; justify-content: flex-end;"></div>
+                        </div>
+                        
+                        <p id="paragrafoNome2"></p>
+                        <p id="paragrafoTitulo2"></p>
+                        <p id="paragrafoValor2" style="border: #000000 solid 1px;"></p>
+                        <p id="paragrafoTexto2"></p>
+                        <p id="paragrafoChavePix2"></p>
+                        <p id="paragrafoCidadeData2" style="text-align: right;"></p>
+                        <br/><br/>
+                        <span id="assinatura2" style="border-top: 1px solid #999; margin: auto; display: block; width: 30%; text-align: center;"></span>
+                    </div>
+                    <br/>
+                </div>
                 
 
-                </div>
-
                 <button id="impressao" onclick="abrirImpressao()">
-                    Imprimir
+                    <div class="row" style="margin: 2px;">
+                        <div style="background-color: #ffffff; padding: 1px;">
+                            <i class="fa fa-print" style="font-size:36px; color: #3273dc;"></i>
+                        </div>
+                        <div style="flex: 60%;">
+                            <span style="font-size: xx-large; color: #3273dc;">Imprimir</span>
+                        </div>
+                    </div>
                 </button>
                 
             </div>
